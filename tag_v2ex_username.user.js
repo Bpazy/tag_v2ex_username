@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         给 V2EX 用户打标签
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description  try to take over the world!
 // @author       You
 // @match        https://www.v2ex.com/*
@@ -93,7 +93,7 @@
     }
 
     async function main() {
-        let users = document.querySelectorAll('a[href^="/member/"]')
+        let users = document.querySelectorAll('strong > a[href^="/member/"]')
         let map = await readAllTags();
         for (let i = 0; i < users.length; i++) {
             let user = users[i]
@@ -109,6 +109,7 @@
                         tagElement.onclick = () => promptToWriteTag(username, tags, ',')
                         tagElement.className = 'tag'
                         tagElement.style.color = 'red'
+                        tagElement.style.paddingLeft = '5px'
                         tagElement.innerHTML = '<li class="fa fa-tag"></li> ' + tag
                         user.parentNode.insertBefore(tagElement, user.nextSibling)
                     }
@@ -117,6 +118,7 @@
                     let tagElement = document.createElement('a')
                     tagElement.onclick = () => promptToWriteTag(username, [], '')
                     tagElement.className = 'tag'
+                    tagElement.style.paddingLeft = '5px'
                     tagElement.innerHTML = '<li class="fa fa-tag"></li> '
                     user.parentNode.insertBefore(tagElement, user.nextSibling)
                 }
