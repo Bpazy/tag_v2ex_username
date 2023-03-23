@@ -15,10 +15,7 @@
 
 (function () {
     'use strict';
-    const GIST_FILE_NAME = localStorage.getItem('GIST_FILE_NAME');
-    if (GIST_FILE_NAME === null || GIST_FILE_NAME === 'null' || GIST_FILE_NAME === '' || GIST_FILE_NAME === undefined || GIST_FILE_NAME === 'undefined') {
-        localStorage.setItem('GIST_FILE_NAME', prompt('请输入用来存储 Tag的 Gist 文件名', 'v2ex-user-tags.json'));
-    }
+    const GIST_FILE_NAME = 'v2ex-user-tags.json';
 
     const GIST_TOKEN = localStorage.getItem('GIST_TOKEN');
     if (GIST_TOKEN === null || GIST_TOKEN === 'null'||  GIST_TOKEN === ''  || GIST_TOKEN === undefined || GIST_TOKEN === 'undefined') {
@@ -100,7 +97,7 @@
         let map = await readAllTags();
         for (let i = 0; i < users.length; i++) {
             let user = users[i]
-            if (user.children.length == 0) {
+            if (user.children.length === 0) {
                 let username = user.innerHTML
                 if (map.has(username)) {
                     // tags is an array
