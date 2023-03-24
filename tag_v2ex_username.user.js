@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         给 V2EX 用户打标签
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @description  try to take over the world!
 // @author       You
 // @match        https://www.v2ex.com/*
@@ -93,7 +93,7 @@
     }
 
     async function main() {
-        let users = document.querySelectorAll('strong > a[href^="/member/"]')
+        let users = document.querySelectorAll('strong > a[href^="/member/"], small > a[href^="/member/"]')
         let map = await readAllTags();
         for (let i = 0; i < users.length; i++) {
             let user = users[i]
