@@ -1,30 +1,30 @@
 // ==UserScript==
-// @name         给 V2EX 用户打标签
+// @name         tag_v2ex_username
 // @namespace    http://tampermonkey.net/
-// @version      0.3
-// @description  try to take over the world!
+// @version      0.4
+// @description  给 V2EX 用户打标签
 // @author       You
-// @match        https://www.v2ex.com/*
 // @match        http*://*.v2ex.com/*
-// @match        http*://v2ex.com/*s
-// @match        https://v2ex.com/
+// @match        http*://v2ex.com/
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=v2ex.com
 // @grant        GM_xmlhttpRequest
 // @grant        GM_download
+// @grant        GM_setValue
+// @grant        GM_getValue
 // ==/UserScript==
 
 (function () {
     'use strict';
     const GIST_FILE_NAME = 'v2ex-user-tags.json';
 
-    const GIST_TOKEN = localStorage.getItem('GIST_TOKEN');
+    const GIST_TOKEN = GM_getValue('GIST_TOKEN');
     if (GIST_TOKEN === null || GIST_TOKEN === 'null'||  GIST_TOKEN === ''  || GIST_TOKEN === undefined || GIST_TOKEN === 'undefined') {
-        localStorage.setItem('GIST_TOKEN', prompt('请输入用于读写 Gist 的 GitHub Token,创建时可仅勾选 创建Gist 权限, https://github.com/settings/tokens'));
+        GM_setValue('GIST_TOKEN', prompt('请输入用于读写 Gist 的 GitHub Token,创建时可仅勾选 创建Gist 权限, https://github.com/settings/tokens'));
     }
 
-    const GIST_ID = localStorage.getItem('GIST_ID');
+    const GIST_ID = GM_getValue('GIST_ID');
     if (GIST_ID === null || GIST_ID === 'null' || GIST_ID === '' || GIST_ID === undefined || GIST_ID === 'undefined') {
-        localStorage.setItem('GIST_ID', prompt('请输入创建完成的 Gist ID, https://gist.github.com/'));
+        GM_setValue('GIST_ID', prompt('请输入创建完成的 Gist ID, https://gist.github.com/'));
     }
 
     function readAllTags() {
